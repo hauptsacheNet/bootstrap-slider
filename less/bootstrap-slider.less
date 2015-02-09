@@ -27,8 +27,9 @@
 @import '../../bootstrap/less/variables.less'; // Bootstrap variables
 @import '../../bootstrap/less/mixins.less';    // Bootstrap mixins
 
-@slider-line-height: @line-height-computed;
-@slider-track-height: @slider-line-height / 2;
+@slider-height: @input-height-base;
+@slider-handle-height: @line-height-computed;
+@slider-track-height: @slider-handle-height / 2;
 
 @slider-track-color: @input-bg;
 @slider-track-disabled-color: @input-bg-disabled;
@@ -45,11 +46,13 @@
 	position: relative;
 	&.slider-horizontal {
 		width: 210px;
-		height: @slider-line-height;
+		height: @slider-height;
+	    padding-top: floor((@slider-height - @slider-handle-height) / 2);
+	    padding-bottom: ceil((@slider-height - @slider-handle-height) / 2);
 		.slider-track {
 			height: @slider-track-height;
+		  	margin-top: -@slider-track-height / 2;
 			width: 100%;
-			margin-top: -(@slider-line-height - @slider-track-height) / 2;
 			top: 50%;
 			left: 0;
 		}
@@ -60,10 +63,10 @@
 		}
 		.slider-tick,
 		.slider-handle {
-			margin-left: (-@slider-line-height / 2);
-			margin-top: -(@slider-line-height - @slider-track-height) / 2;
+			margin-left: (-@slider-handle-height / 2);
+			margin-top: -(@slider-handle-height - @slider-track-height) / 2;
 			&.triangle {
-				border-width: 0 (@slider-line-height/2) (@slider-line-height/2) (@slider-line-height/2);
+				border-width: 0 (@slider-handle-height/2) (@slider-handle-height/2) (@slider-handle-height/2);
 				width: 0;
 				height: 0;
 				border-bottom-color: #0480be;
@@ -74,7 +77,7 @@
 			white-space: nowrap;
 
 			.slider-tick-label {
-				margin-top: @slider-line-height * 1.2;
+				margin-top: @slider-handle-height * 1.2;
 				display: inline-block;
 				text-align: center;
 			}
@@ -82,11 +85,11 @@
 	}
 	&.slider-vertical {
 		height: 210px;
-		width: @slider-line-height;
+		width: @slider-handle-height;
 		.slider-track {
 			width: @slider-track-height;
+		  	margin-left: -@slider-track-height / 2;
 			height: 100%;
-			margin-left: -(@slider-line-height - @slider-track-height) / 2;
 			left: 50%;
 			top: 0;
 		}
@@ -103,10 +106,10 @@
 		}
 		.slider-tick,
 		.slider-handle {
-			margin-left: -@slider-line-height / 4;
-			margin-top: -(@slider-line-height - @slider-track-height) / 2;
+			margin-left: -@slider-handle-height / 4;
+			margin-top: -(@slider-handle-height - @slider-track-height) / 2;
 			&.triangle {
-				border-width: (@slider-line-height/2) 0 (@slider-line-height/2) (@slider-line-height/2);
+				border-width: (@slider-handle-height/2) 0 (@slider-handle-height/2) (@slider-handle-height/2);
 				width: 1px;
 				height: 1px;
 				border-left-color: #0480be;
@@ -161,8 +164,8 @@
 }
 .slider-handle {
 	position: absolute;
-	width: @slider-line-height;
-	height: @slider-line-height;
+	width: @slider-handle-height;
+	height: @slider-handle-height;
 	background-color: @slider-handle-color;
     border: 1px solid @input-border;
 	filter: none;
@@ -175,7 +178,7 @@
 	&.custom {
 		background: transparent none;
 		&::before{
-			line-height: @slider-line-height;
+			line-height: @slider-handle-height;
 			font-size: 20px;
 			content: '\2605'; //unicode star character
 			color: #726204;
@@ -184,8 +187,8 @@
 }
 .slider-tick {
 	position: absolute;
-	width: @slider-line-height;
-	height: @slider-line-height;
+	width: @slider-handle-height;
+	height: @slider-handle-height;
   	background-color: @slider-track-color;
 	.box-shadow(inset 0 -1px 0 rgba(0,0,0,.15));
 	filter: none;
@@ -200,7 +203,7 @@
 	&.custom {
 		background: transparent none;
 		&::before{
-			line-height: @slider-line-height;
+			line-height: @slider-handle-height;
 			font-size: 20px;
 			content: '\2605'; //unicode star character
 			color: #726204;
